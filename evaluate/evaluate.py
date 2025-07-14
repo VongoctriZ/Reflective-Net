@@ -1,6 +1,7 @@
-from configs.config import Config
+from configs.config import *
 from dataset_handling.dataset_utils import get_full_ds, gds
 from classifier_handling.classifier import *
+
 
 def print_executing_config(cfg, architecture, data_name):
     print('Executing config:')

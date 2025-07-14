@@ -136,13 +136,13 @@ class ExpNet(nn.Module):
             cur_aweis = torch.cat(cur_aweis, dim=1)
             aweis.append(cur_aweis)
 
-        print('weights.shape before concat', weights.shape)
+        # print('weights.shape before concat', weights.shape)
         weights = torch.cat(aweis, dim=1)
-        print('weights.shape after concat', weights.shape)
+        # print('weights.shape after concat', weights.shape)
         weights = self.reduce_block(weights)
-        print('weights.shape after reduce', weights.shape)
+        # print('weights.shape after reduce', weights.shape)
 
-        print('x.shape before concat', x.shape)
+        # print('x.shape before concat', x.shape)
         x = torch.cat([x, weights], axis=1)
         return x
 
