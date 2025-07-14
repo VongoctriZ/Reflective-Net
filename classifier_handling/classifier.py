@@ -7,6 +7,10 @@ import torch.cuda.amp as tca
 from models.expnet import ExpNet
 from explain.gradcam_utils import *
 
+def print_info(net_name:str, net:ExpNet):   # for debugging
+    print(f"\n--- Tham số (Parameters) trong {net_name} ---")
+    for name, param in net.named_parameters():
+        print(f"{name} - {param.shape} - {param.requires_grad}")
 # experiment run
 def exp_run(cfg, dataset, get_exp, nexp, exps, grad_cam, target_layers, norm):
     # Data consists of: X, y, all exps, estimated y of exps, logit y, normed logits
@@ -55,7 +59,7 @@ def select_layers(ds):        # Returns X, Y, Exp(SalMaps), classes, logits (if 
 def get_exps(cfg, model, train_dataset, val_dataset, norm):
     gradcam = None
 
-    target_layers = np.array(model.targets)[cfg.exp.exp_depths]
+    target_layers = np.array(model.targets)[cfg.exp.exp_depths] + 1 # +1 cho khớp thứ tự layers trong model 
     target_layers = target_layers.tolist()
     print('target_layer for gradcam:', target_layers)
 
@@ -149,7 +153,7 @@ def get_net(cfg, architecture, isExp=False):
 def get_exp_classifier(cfg, architecture, train_dataset, val_dataset, res_folder, trained_net_self=None):
     exp_net = get_net(cfg, architecture, isExp=True)
 
-    if trained_net_self is not None: # copying params     
+    if trained_net_self is not None: # copying params
         exp_params = dict(exp_net.named_parameters())
         trained_params = dict(trained_net_self.named_parameters())
 

@@ -38,8 +38,8 @@ class ExpConfig:
     data_name: str = 'CIFAR10'
     nin: int = 1
     nSplit: int = 16
-    vgg_exp_layers: List[int] = field(default_factory=lambda: [1, 3, 5])
-    resnet_exp_layers: List[int] = field(default_factory=lambda: [1, 4, 6])
+    vgg_exp_layers: List[int] = field(default_factory=lambda: [1, 3, 6])
+    resnet_exp_layers: List[int] = field(default_factory=lambda: [1, 3, 5])
 
     # for reduce block
     expRed: List[int] = field(default_factory=lambda: [1, 2])
@@ -67,7 +67,7 @@ class TrainConfig:
 
     def __post_init__(self):
         if self.dummy:
-            self.epochs = 10
+            self.epochs = 20
         step = self.epochs // 3 + self.epochs // 10 + 2
         self.milestones = list(range(step, self.epochs, step))
 
@@ -88,3 +88,4 @@ class Config:
         self.train = TrainConfig(dummy=self.dummy)
         self.exp = ExpConfig(exp_depths=self.exp_depths, data_name=self.dataset_name)
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+

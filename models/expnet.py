@@ -60,9 +60,9 @@ class ExpNet(nn.Module):
 
         # Lấy danh sách target layers từ config
         if self.architecture == 'vgg':
-            layers = np.array(self.cfg.exp.vgg_exp_layers)
+            layers = np.array(self.cfg.exp.vgg_exp_layers) + 1     # +1 vì layer đầu tiên thường là input
         elif self.architecture == 'resnet':
-            layers = np.array(self.cfg.exp.resnet_exp_layers)
+            layers = np.array(self.cfg.exp.resnet_exp_layers) + 1  # +1 vì layer đầu tiên thường là input
         else:
             raise ValueError(f"Unsupported architecture: {self.architecture}")
 
@@ -74,8 +74,8 @@ class ExpNet(nn.Module):
         red_factor = np.prod(self.cfg.exp.expRed) if self.cfg.exp.expRed else 1
         added = max(1, self.nExtra // red_factor)
         for idx in target_layers:
-            self.offsets[idx + 1] = added  # +1 vì layer đầu tiên thường là input
-
+            self.offsets[idx] = added  
+    
     def _build_backbone(self):
         if self.architecture == 'vgg':
             self.features = self._build_vgg()
@@ -102,7 +102,7 @@ class ExpNet(nn.Module):
             in_c = self.base_channels[i] + self.offsets[i] if i > 0 else self.base_channels[i]
             mid_c = self.base_channels[i + 1]
             out_c = self.base_channels[i + 2]
-            block = ResNet_ConvBlock(in_c, mid_c, out_c, stride=self.strides[i])
+            block = ResNet_ConvBlock(in_c, mid_c, out_c, stride=self.strides[i], offset=self.offsets[i+1])
             self.layers.append(block.conv1)
             self.layers.append(block.conv2)
 
@@ -136,13 +136,9 @@ class ExpNet(nn.Module):
             cur_aweis = torch.cat(cur_aweis, dim=1)
             aweis.append(cur_aweis)
 
-        # print('weights.shape before concat', weights.shape)
         weights = torch.cat(aweis, dim=1)
-        # print('weights.shape after concat', weights.shape)
         weights = self.reduce_block(weights)
-        # print('weights.shape after reduce', weights.shape)
 
-        # print('x.shape before concat', x.shape)
         x = torch.cat([x, weights], axis=1)
         return x
 

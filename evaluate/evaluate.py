@@ -118,3 +118,13 @@ def evaluate_non_self(architecture_c0='VGG', architecture_ref='RESNET', data_nam
 if __name__ == '__main__':
     evaluate_self(architecture='vgg', data_name='cifar10', exp_depths=[1], runtimes=1)
     
+
+# vgg -> pass
+# evaluate_self(architecture='vgg', data_name='cifar10', exp_depths=[1], runtimes=1)
+
+# resnet -> pass
+# evaluate_self(architecture='resnet', data_name='cifar10', exp_depths=[1], runtimes=1)
+
+# Còn lỗi shape khi thực hiện handle explanantion của gradcam nếu 2 kiến trúc khác nhau,
+# có thể là tại vị trí layer được chọn ở 2 kiến trúc chưa khớp kích thước filter với nhau.
+# evaluate_non_self(architecture_c0='vgg', architecture_ref='resnet', data_name='cifar10', exp_depths=[0], runtimes=1)

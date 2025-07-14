@@ -110,3 +110,4 @@ class GradCAM(nn.Module):
 
     def __call__(self, input, class_idx=None, retain_graph=False):
         return self.forward(input, class_idx, retain_graph)
+    

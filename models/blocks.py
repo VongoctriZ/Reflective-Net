@@ -61,7 +61,7 @@ class VGG_ConvBlock(nn.Module):
 
 
 class ResNet_ConvBlock(nn.Module):
-    def __init__(self, in_channels, mid_channels, out_channels, stride=1):
+    def __init__(self, in_channels, mid_channels, out_channels, stride=1, offset=0):
         super().__init__()
         self.conv1 = nn.Sequential(
             nn.Conv2d(in_channels, mid_channels, kernel_size=3, stride=stride, padding=1, bias=False),
@@ -69,7 +69,7 @@ class ResNet_ConvBlock(nn.Module):
             nn.ReLU(inplace=True)
         )
         self.conv2 = nn.Sequential(
-            nn.Conv2d(mid_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.Conv2d(mid_channels + offset, out_channels, kernel_size=3, stride=1, padding=1, bias=False),
             nn.BatchNorm2d(out_channels)
         )
         self.relu = nn.ReLU(inplace=True)
@@ -98,12 +98,12 @@ class ReduceBlock(nn.Module):
         out_channels = max(1, mid_channels // red2)
 
         if architecture == 'vgg':
-            ks1 = 3 if in_channels > 64 else 1
-            ks2 = 3 if mid_channels > 32 else 1
+            ks1 = 1
+            ks2 = 3 if red2 > 10 else 1
         elif architecture == 'resnet':
-            ks1 = 3 if in_channels > 128 else 1
-            ks2 = 3 if mid_channels > 64 else 1
-            self.pool = nn.AdaptiveAvgPool2d((1, 1))
+            ks1 = 1
+            ks2 = 3 if red2 > 10 else 1 
+            # self.pool = nn.AdaptiveAvgPool2d((1, 1))
         else:
             raise ValueError("Unsupported architecture for ReduceBlock")
 
@@ -119,5 +119,5 @@ class ReduceBlock(nn.Module):
 
     def forward(self, x):
         x = self.reduce(x)
-        if self.architecture == 'resnet': x = self.pool(x)
+        # if self.architecture == 'resnet': x = self.pool(x)
         return x

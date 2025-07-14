@@ -16,7 +16,7 @@ Mục tiêu của khóa luận hay project này là tái hiện và đánh giá 
 
 ### Mục lục
 - [Cấu trúc thư mục](#cấu-trúc-thư-mục)
-- [Cài đặt](#cài-đặt-project)
+- [Cài đặt Project](#cài-đặt-project)
 - [Chạy đánh giá](#chạy-đánh-giá)
 - [Kết quả](#kết-quả)
 - [Hướng phát triển tương lai](#hướng-phát-triển-tương-lai)
@@ -65,13 +65,13 @@ pip install -r requirements.txt
 ### Chạy đánh giá
 1. Chạy bằng script (local)
 ```
-python .\evaluate\evaluate.py
+python -m evaluate.evaluate
 ```
 2. Chạy bằng jupyter notebook
 Nếu chạy trên máy local
 ```
 pip install jupyter
-jupyter notebook .\evaluate\evaluate.ipynb
+jupyter notebook .\evaluate\reflective-net-evaluate.ipynb
 ```
 Hoặc chạy trực tiếp trên [Google Colab](https://colab.research.google.com/) 
 
@@ -93,6 +93,5 @@ Dưới đây là một kết quả khảo sát cho tham số độ sâu lời g
 
 ### Hướng phát triển tương lai
 - Đảm bảo reflective net hoạt động ổn định trên các kiến trúc CNN khác nhau.
-- Tích hợp phương pháp GradCAM++ để nâng cao độ sắc nét bản đồ saliency.
-- Thử nghiệm các phương pháp giải thích khác để so sánh.
+- Thử nghiệm các phương pháp giải thích khác để so sánh. Chẳng hạn như tích hợp phương pháp GradCAM++ để nâng cao độ sắc nét bản đồ saliency.
 - Thử nghiệm trên nhiều dataset khác như ImageNet (hoặc ảnh y tế).

@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import torch.cuda.amp as tca
-from gradcam import GradCAM
+from explain.gradcam import GradCAM
 
 def get_pred(model, rawx, device):
     rawx = torch.from_numpy(rawx).to(device)
