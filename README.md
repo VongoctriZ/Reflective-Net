@@ -3,7 +3,7 @@
 Khóa luận tốt nghiệp | Khoa Công nghệ Thông tin | Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 
 Sinh viên thực hiện:
-- 21120149 : Nguyễn ĐĂNG Thới Tòan
+- 21120149 : Nguyễn Đăng Thới Toàn
 - 21120602 : Võ Ngọc Trí
 
 Giảng viên hướng dẫn: Lê Hoài Bắc
