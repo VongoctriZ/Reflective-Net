@@ -15,6 +15,11 @@ Mục tiêu của khóa luận hay project này là tái hiện và đánh giá 
 - Đề xuất cấu trúc mã hóa lại theo hướng hướng đối tượng (object-oriented), hỗ trợ tái sử dụng và mở rộng mô hình trong các nghiên cứu tiếp theo.
 
 ### Mục lục
+- [Cấu trúc thư mục](#cấu-trúc-thư-mục)
+- [Cài đặt](#cài-đặt-project)
+- [Chạy đánh giá](#chạy-đánh-giá)
+- [Kết quả](#kết-quả)
+- [Hướng phát triển tương lai](#hướng-phát-triển-tương-lai)
 
 ### Cấu trúc thư mục
 ```text
@@ -72,8 +77,13 @@ Hoặc chạy trực tiếp trên [Google Colab](https://colab.research.google.c
 
 ### Kết quả
 1. Kết quả một run đánh giá
+    
+Dưới đây là kết quả ở một run đánh giá cho reflective-net, với cấu hình đơn giản.
+![alt text](example_evaluate.png)
 
 2. Tổng hợp kết quả khảo sát
+
+Kết quả khảo sát và đánh giá chi tiết ở báo cáo khóa luận.
 Dưới đây là một kết quả khảo sát cho tham số độ sâu lời giải thích d trong GradCAM trên 2 tập dữ liệu Cifar-10 và Cifar-100.
 ![alt text](example_result.png)
 
